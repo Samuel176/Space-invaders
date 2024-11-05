@@ -33,6 +33,7 @@ export default class EnemyController{
         this.enemyDeathSound.volume = 0.1;
         this.createEnemies();
         this.score = 0;
+        this.powerUpScore = 0;
         this.currentLevel = 1;
         
         
@@ -83,7 +84,7 @@ export default class EnemyController{
             [2, 0, 2, 2, 3, 3, 2, 2, 0, 2],
           ];
           this.fireBulletTimerDefault = 45;
-          this.defaultXVelocity = 0.8;
+          this.defaultXVelocity = 1;
         }
         if(this.currentLevel === 4){
             this.enemyMap = [
@@ -94,8 +95,8 @@ export default class EnemyController{
             [1, 1, 1, 1, 3, 3, 1, 1, 1, 1],
             [2, 3, 2, 2, 3, 3, 2, 2, 3, 2],
           ];
-          this.fireBulletTimerDefault = 45;
-          this.defaultXVelocity = 1;
+          this.fireBulletTimerDefault = 35;
+          this.defaultXVelocity = 1.2;
         }
         if(this.currentLevel === 5){
             this.enemyMap = [
@@ -107,7 +108,7 @@ export default class EnemyController{
             [2, 0, 2, 0, 0, 0, 0, 0, 3, 2],
           ];
           this.fireBulletTimerDefault = 20;
-          this.defaultXVelocity = 0.7;
+          this.defaultXVelocity = 1.5;
         }
         if(this.currentLevel === 5){
             this.enemyMap = [
@@ -131,6 +132,7 @@ export default class EnemyController{
                     this.enemyDeathSound.currentTime = 0;
                     this.enemyDeathSound.play(); 
                     this.score += 100;
+                    this.powerUpScore += 100;
                     
                     
                 }     
@@ -234,12 +236,14 @@ export default class EnemyController{
         return this.enemyRows.flat().some((enemy) => enemy.collideWith(sprite))
     }
     reset(){
+        this.currentLevel = 1;
         this.xVelocity = this.defaultXVelocity;
         this.yVelocity = this.defaultYVelocity;
         this.defaultXVelocity = 0.9;
         this.defaultYVelocity = 0.9;
         this.moveDownTimer = this.moveDownTimerDefault;
         this.score = 0;
+        this.powerUpScore = 0;
         this.createEnemies()
         this.resetMoveDowmTimer()
         this.decrementMoveTimer()
@@ -248,11 +252,16 @@ export default class EnemyController{
         this.currentLevel ++;
         this.xVelocity = this.defaultXVelocity;
         this.yVelocity = this.defaultYVelocity;
-        
-        this.defaultYVelocity = 0.7;
+
+        this.defaultXVelocity = 0.8;
+        this.defaultYVelocity = 0.8;
+        this.powerUpScore = 0;
         this.moveDownTimer = this.moveDownTimerDefault;
         this.createEnemies()
         this.resetMoveDowmTimer()
         this.decrementMoveTimer()
+    }
+    powerUpUsed(){
+        this.powerUpScore = 0;
     }
 }
