@@ -40,6 +40,14 @@
             color: white;
             
         }
+        .info-box{
+            display: flex;
+            justify-content: space-between;
+        }
+        .info-box-child{
+            padding-right: 30px;
+            padding-left: 30px;
+        }
     </style>
 </head>
 <body>
@@ -51,8 +59,17 @@
     <canvas id="game"></canvas>
     <div class="info">
         <h2 class="text">Instructions</h2>
-        <p class="text">Use arrow keys to move left and right</p>
-        <p class="text">Space to shoot</p>
+        <div class="info-box">
+            <div class="info-box-child">
+                <p class="text">Use arrow keys to move left and right</p>
+                <p class="text">Space to shoot</p>
+            </div>
+            <div class="info-box-child">
+                <p class="text">R to Reset</p>
+                <p class="text">P to power attack</p>
+            </div>
+    </div>
+        
     </div>
     <script type="module" src="index.js"></script>
 </body>
