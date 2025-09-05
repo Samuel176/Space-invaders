@@ -10,7 +10,7 @@ export default class player{
         this.velocity = velocity;
         this.bulletController = bulletController;
         this.x = this.canvas.width/2;
-        this.y = this.canvas.height -75;
+        this.y = this.canvas.height -80;
         this.width = 50;
         this.height = 48;
         this.image = new Image();
@@ -44,7 +44,7 @@ export default class player{
             this.x += -this.velocity;
         }
 
-        }
+    }
     
     keydown = event => {
         if(event.code == "ArrowRight"){

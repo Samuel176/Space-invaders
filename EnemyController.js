@@ -252,7 +252,7 @@ export default class EnemyController{
         this.currentLevel ++;
         this.xVelocity = this.defaultXVelocity;
         this.yVelocity = this.defaultYVelocity;
-
+        console.log("didWin working")
         this.defaultXVelocity = 0.8;
         this.defaultYVelocity = 0.8;
         this.powerUpScore = 0;

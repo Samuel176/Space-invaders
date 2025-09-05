@@ -1,11 +1,12 @@
+
 import Player from "./player.js";
 import EnemyController from "./EnemyController.js";
 import BulletController from "./BulletController.js";
-import Bullet from "./Bullets.js";
+// import Bullet from "./Bullets.js";
 import PowerUp from "./Powerup.js";
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
-let newTotal = 10
+let newTotal = 10;
 let ammo = 6
 canvas.width = 600;
 canvas.height = 700;
@@ -19,7 +20,7 @@ background.src = "images/space.png";
 const playerBulletController = new BulletController(canvas, ammo,"blue",true)
 const enemyBulletController = new BulletController(canvas, newTotal , "red", false)
 const enemyController = new EnemyController(canvas, enemyBulletController, playerBulletController);
-const player = new Player(canvas, 3, playerBulletController)
+const player = new Player(canvas,  3, playerBulletController)
 const powerUp = new PowerUp(canvas,powerMeter);
 
 
@@ -33,6 +34,9 @@ function game(){
    displayGameOver()
    displayScore()
    displayPower()
+   if(didWin){
+      powerUpSelectOption()
+   }
    
   
 
@@ -83,16 +87,13 @@ function displayPower(){
    
 }
 
-
-
-
 function displayGameOver(){
    if(isGameOver || didWin){
       let text = didWin ? "Winner!" : "Game Over"
       let textOffSet = didWin ? 3.5 : 5;
       ctx.fillStyle = "white";
       ctx.font = "70px Arial";
-      ctx.fillText(text, canvas.width / textOffSet, canvas.height /2)
+      ctx.fillText(text, canvas.width / textOffSet, canvas.height /2.5)
    }
    if(isGameOver || didWin){
       let text = "Press R To Continue"
@@ -113,13 +114,24 @@ function reset(){
 }
 function didWinReset(){
    ctx.clearRect(0, 0, canvas.width, canvas.height);
+   enemyController.didWinReset();
    clearInterval(game);
    enemyController.levelMap();
-   enemyController.didWinReset();
+   
    powerUp.powerBarReset();
    playerBulletController.bullets = [];
    enemyBulletController.bullets = [];
    
+}
+
+function powerUpSelectOption(){
+   let text = "Chose one!";
+   let textOffSet =  3.5;
+      ctx.fillStyle = "white";
+      ctx.font = "45px Arial";
+      ctx.fillText(text, canvas.width / textOffSet, canvas.height /1.75)
+
+      
 }
 
 function gameOverToggle(){
@@ -141,6 +153,7 @@ function gameOverToggle(){
              didWinReset()
              bulletLevel()
              console.log(newTotal)
+             
              
              
          }
